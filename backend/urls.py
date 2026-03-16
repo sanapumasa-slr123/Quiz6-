@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import api_root_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', api_root_view, name='api_root'),
     path('api/v1/users/', include('users.urls')),
     path('api/v1/applications/', include('applications.urls')),
     path('api/v1/services/', include('services.urls')),
