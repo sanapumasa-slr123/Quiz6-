@@ -1,0 +1,175 @@
+.user-screen {
+    padding: 20px;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-container h1 {
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 1em;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.tab-btn:hover {
+    color: #333;
+}
+
+.tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.tab-content {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.tab-content h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    background: #fee;
+    color: #c33;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.admin-table thead {
+    background: #f9f9f9;
+    border-bottom: 2px solid #eee;
+}
+
+.admin-table th {
+    padding: 12px;
+    text-align: left;
+    color: #333;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.admin-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #666;
+}
+
+.admin-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.admin-table button {
+    padding: 6px 12px;
+    margin-right: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s;
+}
+
+.edit-btn,
+.approve-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.edit-btn:hover,
+.approve-btn:hover {
+    background: #45a049;
+}
+
+.delete-btn,
+.decline-btn {
+    background: #f44336;
+    color: white;
+}
+
+.delete-btn:hover,
+.decline-btn:hover {
+    background: #da190b;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status.approved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status.declined {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 20px;
+    }
+
+    .admin-table {
+        font-size: 0.9em;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 8px;
+    }
+
+    .admin-table button {
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+}

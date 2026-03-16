@@ -7,8 +7,11 @@ import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailScreen';
 import ApplySeller from './screens/ApplySeller';
 import UserProfile from './screens/UserProfile';
+import UserScreen from './screens/UserScreen';
+import SellerDashboard from './screens/SellerDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header';
+import Chatbot from './components/Chatbot';
 import './App.css';
 
 function App() {
@@ -37,7 +40,24 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/seller/dashboard"
+            element={
+              <ProtectedRoute requiredRole="seller">
+                <SellerDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <UserScreen />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
+        <Chatbot />
       </Router>
     </Provider>
   );
