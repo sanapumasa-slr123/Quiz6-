@@ -4,6 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { listServices } from '../redux/actions/serviceActions';
 import './HomeScreen.css';
 
+const homeCategories = [
+    {
+        title: 'Electrical Installation',
+        description: 'Wiring, panel upgrades, outlets, and complete electrical setup for new spaces.',
+    },
+    {
+        title: 'Electrical Maintenance',
+        description: 'Routine inspections and preventive maintenance to keep systems safe and reliable.',
+    },
+    {
+        title: 'Electrical Repair',
+        description: 'Troubleshooting and fixing faults, power issues, and damaged electrical components.',
+    },
+];
+
 const HomeScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -25,7 +40,27 @@ const HomeScreen = () => {
         <div className="home-screen">
             <div className="home-header">
                 <h1>Electrical Services Marketplace</h1>
-                <p>Find expert fence and deck services near you</p>
+                <p>Find trusted electrical experts for installation, maintenance, and repair</p>
+            </div>
+
+            <div className="home-categories">
+                <div className="categories-header">
+                    <h2>Service Categories</h2>
+                    <button
+                        className="view-all-btn"
+                        onClick={() => navigate('/electrical-services')}
+                    >
+                        View Details
+                    </button>
+                </div>
+                <div className="categories-grid">
+                    {homeCategories.map((category) => (
+                        <div key={category.title} className="category-item">
+                            <h3>{category.title}</h3>
+                            <p>{category.description}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             {error && <div className="error-message">{error}</div>}
