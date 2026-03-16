@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer } from './reducers/userReducer';
+import { userReducer } from './redux/reducers/userReducer';
 import { serviceReducer } from './redux/reducers/serviceReducer';
 import { orderReducer } from './redux/reducers/orderReducer';
 import { adminReducer } from './redux/reducers/adminReducer';
