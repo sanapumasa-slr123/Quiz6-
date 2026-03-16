@@ -83,11 +83,18 @@ export const listApplications = () => async (dispatch) => {
     }
 };
 
-export const sendChatMessage = (message) => async (dispatch) => {
+export const sendChatMessage = (message) => async (dispatch, getState) => {
+    const { admin } = getState();
+    const history = (admin.chatMessages || []).slice(-8).flatMap((item) => [
+        { role: 'user', content: item.user },
+        { role: 'assistant', content: item.bot },
+    ]);
+
     try {
         dispatch({ type: CHAT_SEND_MESSAGE_REQUEST });
         const { data } = await axiosInstance.post('/api/v1/chat/ask/', {
             message,
+            history,
         });
         dispatch({
             type: CHAT_SEND_MESSAGE_SUCCESS,
