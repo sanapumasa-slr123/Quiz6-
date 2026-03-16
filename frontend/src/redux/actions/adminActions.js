@@ -94,9 +94,18 @@ export const sendChatMessage = (message) => async (dispatch) => {
             payload: { user: message, bot: data.reply },
         });
     } catch (error) {
+        const fallbackMessage =
+            error.response?.data?.detail ||
+            'I am having trouble connecting right now. Please try again in a moment.';
+
         dispatch({
             type: CHAT_SEND_MESSAGE_FAILURE,
-            payload: error.response?.data?.detail || 'Failed to send message',
+            payload: fallbackMessage,
+        });
+
+        dispatch({
+            type: CHAT_SEND_MESSAGE_SUCCESS,
+            payload: { user: message, bot: fallbackMessage },
         });
     }
 };
