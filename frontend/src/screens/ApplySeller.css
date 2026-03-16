@@ -1,0 +1,118 @@
+.apply-seller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.apply-container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+}
+
+.apply-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.apply-container > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.success-message {
+    background: #efe;
+    border: 1px solid #3c3;
+    color: #366;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.success-message h3 {
+    margin: 0 0 10px 0;
+    color: #366;
+}
+
+.success-message p {
+    margin: 0;
+    color: #666;
+}
+
+.error-message {
+    background: #fee;
+    border: 1px solid #c33;
+    color: #c33;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.apply-content {
+    margin: 20px 0;
+}
+
+.apply-content h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.apply-content ul {
+    list-style-position: inside;
+    color: #666;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.apply-content li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: #764ba2;
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.back-home-btn {
+    width: 100%;
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.back-home-btn:hover {
+    background: #764ba2;
+}
