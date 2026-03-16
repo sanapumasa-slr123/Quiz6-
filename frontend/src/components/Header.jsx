@@ -23,6 +23,7 @@ const Header = () => {
 
                 <nav className="nav">
                     <Link to="/" className="nav-link">Home</Link>
+                    <Link to="/electrical-services" className="nav-link">Electrical Services</Link>
 
                     {userInfo ? (
                         <>

@@ -4,6 +4,7 @@ import store from './store';
 import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
 import HomeScreen from './screens/HomeScreen';
+import ElectricalServices from './screens/ElectricalServices';
 import DetailScreen from './screens/DetailScreen';
 import ApplySeller from './screens/ApplySeller';
 import UserProfile from './screens/UserProfile';
@@ -23,6 +24,7 @@ function App() {
           <Header />
           <Routes>
           <Route path="/" element={<HomeScreen />} />
+          <Route path="/electrical-services" element={<ElectricalServices />} />
           <Route path="/services/:id" element={<DetailScreen />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />

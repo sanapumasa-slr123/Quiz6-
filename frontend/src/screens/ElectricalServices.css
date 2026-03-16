@@ -1,0 +1,85 @@
+.electrical-page {
+    min-height: calc(100vh - 80px);
+    padding: 32px 20px 48px;
+    background: radial-gradient(circle at 20% 20%, #eef3ff 0%, #f9fbff 35%, #ffffff 100%);
+}
+
+.electrical-hero {
+    max-width: 900px;
+    margin: 0 auto 28px;
+    text-align: center;
+}
+
+.electrical-hero h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    color: #1b2a4a;
+}
+
+.electrical-hero p {
+    margin: 14px auto 22px;
+    max-width: 760px;
+    color: #4e5d78;
+    line-height: 1.6;
+}
+
+.browse-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #2f66ff 0%, #1840b9 100%);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.browse-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(24, 64, 185, 0.25);
+}
+
+.category-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.category-card {
+    background: #ffffff;
+    border: 1px solid #dde5ff;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 8px 24px rgba(20, 41, 91, 0.08);
+}
+
+.category-card h2 {
+    margin-top: 0;
+    color: #1f3f9b;
+    font-size: 1.15rem;
+}
+
+.category-card p {
+    color: #4e5d78;
+    line-height: 1.55;
+    margin-bottom: 12px;
+}
+
+.category-card ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #2e3f66;
+    line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .electrical-hero h1 {
+        font-size: 1.85rem;
+    }
+}
