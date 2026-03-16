@@ -1,0 +1,100 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.signup-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.signup-box h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.signup-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-box input,
+.signup-box select {
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.signup-box input:focus,
+.signup-box select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.signup-box button {
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.signup-box button:hover:not(:disabled) {
+    background: #764ba2;
+}
+
+.signup-box button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.signup-box p {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+}
+
+.signup-box a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-box a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    background: #fee;
+    color: #c33;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.error {
+    color: #c33;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}

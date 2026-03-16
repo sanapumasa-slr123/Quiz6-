@@ -1,0 +1,29 @@
+import axios from 'axios';
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:8000',
+});
+
+axiosInstance.interceptors.request.use(
+    (config) => {
+        const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
+        if (userInfo && userInfo.token) {
+            config.headers.Authorization = `Bearer ${userInfo.token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
+axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            localStorage.removeItem('userInfo');
+            window.location.href = '/signin';
+        }
+        return Promise.reject(error);
+    }
+);
+
+export default axiosInstance;
