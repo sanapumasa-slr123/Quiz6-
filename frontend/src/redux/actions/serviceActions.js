@@ -9,6 +9,12 @@ import {
     SERVICE_CREATE_REQUEST,
     SERVICE_CREATE_SUCCESS,
     SERVICE_CREATE_FAILURE,
+    SERVICE_UPDATE_REQUEST,
+    SERVICE_UPDATE_SUCCESS,
+    SERVICE_UPDATE_FAILURE,
+    SERVICE_DELETE_REQUEST,
+    SERVICE_DELETE_SUCCESS,
+    SERVICE_DELETE_FAILURE,
     APPLICATION_SUBMIT_REQUEST,
     APPLICATION_SUBMIT_SUCCESS,
     APPLICATION_SUBMIT_FAILURE,
@@ -82,6 +88,38 @@ export const listApplications = () => async (dispatch) => {
         dispatch({
             type: APPLICATION_LIST_FAILURE,
             payload: error.response?.data || 'Failed to fetch applications',
+        });
+    }
+};
+
+export const updateService = (id, formData) => async (dispatch) => {
+    try {
+        dispatch({ type: SERVICE_UPDATE_REQUEST });
+        const { data } = await axiosInstance.put(
+            `/api/v1/services/manage/${id}/`,
+            formData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+        );
+        dispatch({ type: SERVICE_UPDATE_SUCCESS, payload: data });
+        dispatch(listServices());
+    } catch (error) {
+        dispatch({
+            type: SERVICE_UPDATE_FAILURE,
+            payload: error.response?.data || 'Failed to update service',
+        });
+    }
+};
+
+export const deleteService = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: SERVICE_DELETE_REQUEST });
+        await axiosInstance.delete(`/api/v1/services/manage/${id}/`);
+        dispatch({ type: SERVICE_DELETE_SUCCESS, payload: id });
+        dispatch(listServices());
+    } catch (error) {
+        dispatch({
+            type: SERVICE_DELETE_FAILURE,
+            payload: error.response?.data || 'Failed to delete service',
         });
     }
 };

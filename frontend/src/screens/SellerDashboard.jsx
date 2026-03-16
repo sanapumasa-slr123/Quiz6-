@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { listServices, createService } from '../redux/actions/serviceActions';
+import { listServices, createService, deleteService } from '../redux/actions/serviceActions';
+import { validateServiceForm } from '../utils/validators';
 import ProtectedRoute from '../components/ProtectedRoute';
+import Loading from '../components/Loading';
 import './SellerDashboard.css';
 
 const SellerDashboard = () => {
@@ -45,17 +47,14 @@ const SellerDashboard = () => {
     };
 
     const validateForm = () => {
-        const newErrors = {};
+        const validationErrors = validateServiceForm(formData);
+        
+        if (!formData.sample_image) {
+            validationErrors.sample_image = 'Image is required';
+        }
 
-        if (!formData.service_name) newErrors.service_name = 'Service name is required';
-        if (!formData.description) newErrors.description = 'Description is required';
-        if (!formData.price) newErrors.price = 'Price is required';
-        else if (parseFloat(formData.price) <= 0) newErrors.price = 'Price must be positive';
-        if (!formData.duration_of_service) newErrors.duration_of_service = 'Duration is required';
-        if (!formData.sample_image) newErrors.sample_image = 'Image is required';
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        setErrors(validationErrors);
+        return Object.keys(validationErrors).length === 0;
     };
 
     const handleSubmit = (e) => {
@@ -82,7 +81,7 @@ const SellerDashboard = () => {
 
     const handleDelete = (serviceId) => {
         if (window.confirm('Are you sure you want to delete this service?')) {
-            // Implement delete service action
+            dispatch(deleteService(serviceId));
         }
     };
 
@@ -182,7 +181,7 @@ const SellerDashboard = () => {
                     <div className="services-section">
                         <h2>Your Services</h2>
                         {loading ? (
-                            <p>Loading your services...</p>
+                            <Loading />
                         ) : userServices && userServices.length > 0 ? (
                             <table className="services-table">
                                 <thead>

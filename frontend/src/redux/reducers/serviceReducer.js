@@ -8,6 +8,12 @@ import {
     SERVICE_CREATE_REQUEST,
     SERVICE_CREATE_SUCCESS,
     SERVICE_CREATE_FAILURE,
+    SERVICE_UPDATE_REQUEST,
+    SERVICE_UPDATE_SUCCESS,
+    SERVICE_UPDATE_FAILURE,
+    SERVICE_DELETE_REQUEST,
+    SERVICE_DELETE_SUCCESS,
+    SERVICE_DELETE_FAILURE,
     APPLICATION_SUBMIT_REQUEST,
     APPLICATION_SUBMIT_SUCCESS,
     APPLICATION_SUBMIT_FAILURE,
@@ -46,6 +52,24 @@ export const serviceReducer = (state = initialState, action) => {
         case SERVICE_CREATE_SUCCESS:
             return { ...state, loading: false, services: [...state.services, action.payload] };
         case SERVICE_CREATE_FAILURE:
+            return { ...state, loading: false, error: action.payload };
+
+        case SERVICE_UPDATE_REQUEST:
+            return { ...state, loading: true, error: null };
+        case SERVICE_UPDATE_SUCCESS:
+            return { ...state, loading: false, service: action.payload };
+        case SERVICE_UPDATE_FAILURE:
+            return { ...state, loading: false, error: action.payload };
+
+        case SERVICE_DELETE_REQUEST:
+            return { ...state, loading: true, error: null };
+        case SERVICE_DELETE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                services: state.services.filter((s) => s.id !== action.payload),
+            };
+        case SERVICE_DELETE_FAILURE:
             return { ...state, loading: false, error: action.payload };
 
         case APPLICATION_SUBMIT_REQUEST:

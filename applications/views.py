@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 import uuid
 from .models import SellerApplication
 from .serializers import SellerApplicationSerializer
+from users.permissions import IsAdmin
 
 User = get_user_model()
 
@@ -29,22 +30,16 @@ def submit_application_view(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdmin])
 def list_applications_view(request):
-    if request.user.role != 'admin':
-        return Response({'detail': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
-    
     applications = SellerApplication.objects.filter(status='pending')
     serializer = SellerApplicationSerializer(applications, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdmin])
 def approve_application_view(request, pk):
-    if request.user.role != 'admin':
-        return Response({'detail': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
-    
     try:
         application = SellerApplication.objects.get(pk=pk)
     except SellerApplication.DoesNotExist:
@@ -63,11 +58,8 @@ def approve_application_view(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdmin])
 def decline_application_view(request, pk):
-    if request.user.role != 'admin':
-        return Response({'detail': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
-    
     try:
         application = SellerApplication.objects.get(pk=pk)
     except SellerApplication.DoesNotExist:

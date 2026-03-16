@@ -12,14 +12,16 @@ import SellerDashboard from './screens/SellerDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header';
 import Chatbot from './components/Chatbot';
+import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-        <Header />
-        <Routes>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <Router>
+          <Header />
+          <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/services/:id" element={<DetailScreen />} />
           <Route path="/signin" element={<SignIn />} />
@@ -60,6 +62,7 @@ function App() {
         <Chatbot />
       </Router>
     </Provider>
+    </ErrorBoundary>
   );
 }
 

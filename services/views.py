@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.shortcuts import get_object_or_404
 from .models import Service
 from .serializers import ServiceSerializer
+from users.permissions import IsSeller
 
 
 @api_view(['GET'])
@@ -28,11 +29,8 @@ def service_detail_view(request, pk):
 
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsSeller])
 def seller_service_manage_view(request):
-    if request.user.role != 'seller':
-        return Response({'detail': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
-    
     if request.method == 'GET':
         services = Service.objects.filter(seller=request.user)
         serializer = ServiceSerializer(services, many=True, context={'request': request})
@@ -47,15 +45,12 @@ def seller_service_manage_view(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsSeller])
 def seller_service_detail_view(request, pk):
     try:
-        service = Service.objects.get(pk=pk)
+        service = Service.objects.get(pk=pk, seller=request.user)
     except Service.DoesNotExist:
-        return Response({'detail': 'Service not found.'}, status=status.HTTP_404_NOT_FOUND)
-    
-    if request.user.role != 'seller' or service.seller != request.user:
-        return Response({'detail': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
+        return Response({'detail': 'Service not found or permission denied.'}, status=status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
         serializer = ServiceSerializer(service, context={'request': request})

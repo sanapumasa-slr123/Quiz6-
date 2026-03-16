@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
 from .serializers import RegisterSerializer, UserSerializer, MyTokenObtainPairSerializer
+from .permissions import IsAdmin
 
 User = get_user_model()
 
@@ -38,22 +39,16 @@ def user_profile_view(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdmin])
 def admin_user_list_view(request):
-    if request.user.role != 'admin':
-        return Response({'detail': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
-    
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdmin])
 def admin_user_detail_view(request, pk):
-    if request.user.role != 'admin':
-        return Response({'detail': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
-    
     try:
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
