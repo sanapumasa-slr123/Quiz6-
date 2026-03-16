@@ -6,6 +6,7 @@ import SignUp from './screens/SignUp';
 import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailScreen';
 import ApplySeller from './screens/ApplySeller';
+import UserProfile from './screens/UserProfile';
 import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header';
 import './App.css';
@@ -25,6 +26,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ApplySeller />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <UserProfile />
               </ProtectedRoute>
             }
           />

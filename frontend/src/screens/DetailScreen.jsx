@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { getServiceDetail } from '../redux/actions/serviceActions';
+import { createOrder } from '../redux/actions/orderActions';
 import './DetailScreen.css';
 
 const DetailScreen = () => {
@@ -17,6 +19,21 @@ const DetailScreen = () => {
 
     const handleBack = () => {
         navigate('/');
+    };
+
+    const handlePayPalSuccess = (orderID) => {
+        if (service) {
+            dispatch(
+                createOrder({
+                    service: service.id,
+                    paypal_transaction_id: orderID,
+                    price_paid: service.price,
+                })
+            );
+            setTimeout(() => {
+                navigate('/profile');
+            }, 1000);
+        }
     };
 
     if (loading) {
@@ -76,7 +93,38 @@ const DetailScreen = () => {
                     </div>
 
                     {userInfo ? (
-                        <button className="avail-btn">Avail Service (PayPal)</button>
+                        <PayPalScriptProvider
+                            options={{
+                                clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID,
+                                currency: 'USD',
+                            }}
+                        >
+                            <PayPalButtons
+                                createOrder={(data, actions) => {
+                                    return actions.order.create({
+                                        purchase_units: [
+                                            {
+                                                amount: {
+                                                    value: service.price.toString(),
+                                                },
+                                                description: service.service_name,
+                                                payee: {
+                                                    merchant_id: service.seller_merchant_id,
+                                                },
+                                            },
+                                        ],
+                                    });
+                                }}
+                                onApprove={(data, actions) => {
+                                    return actions.order.capture().then(() => {
+                                        handlePayPalSuccess(data.orderID);
+                                    });
+                                }}
+                                onError={(err) => {
+                                    console.error('PayPal error:', err);
+                                }}
+                            />
+                        </PayPalScriptProvider>
                     ) : (
                         <button className="avail-btn" onClick={() => navigate('/signin')}>
                             Sign In to Avail
